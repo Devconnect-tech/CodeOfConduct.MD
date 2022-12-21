@@ -1,6 +1,6 @@
 <html>
     <body>
-    <img style=" text-align: center width:auto height: 35%;   "src="Logo.png" alt="Logo" class="logo">
+    <img style=" text-align: center "src="Logo.png" alt="Logo" class="logo">
     <div class="code-of-conduct">
       <h1>Community Code of Conduct</h1>
       <h2>Version 1.0</h2>
