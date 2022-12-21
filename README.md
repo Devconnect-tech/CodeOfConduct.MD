@@ -1,9 +1,4 @@
-<body>
-   display: block;
-      margin: 0 auto;
-     
-      width: auto;
-      height: 35%; 
+
     <img style=" text-align: center width:auto height: 35%;   "src="Logo.png" alt="Logo" class="logo">
     <div class="code-of-conduct">
       <h1>Community Code of Conduct</h1>
@@ -118,6 +113,4 @@
               <li>Rules - A part will: Utilize resources effectively and responsibly, promote the effective and responsible use of resources, and report any suspected misuse of resources.</li>
             </ul>
           </div>
-        </body>
-      </html>
-        
+     
