@@ -1,0 +1,36 @@
+on:
+  issues:
+    types: [labeled]
+jobs:
+  add-to-team:
+    runs-on: ubuntu-latest
+    steps:
+    - name: react
+      if: contains(toJson(github.event.issue.labels.*.name), 'team1')
+      run: |
+        curl -X PUT -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" -H "Accept: application/vnd.github+json" https://api.github.com/teams/{TEAM1_ID}/memberships/${{ github.event.issue.user.login }}
+    - name: cyber
+      if: contains(toJson(github.event.issue.labels.*.name), 'team2')
+      run: |
+        curl -X PUT -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" -H "Accept: application/vnd.github+json" https://api.github.com/teams/{TEAM2_ID}/memberships/${{ github.event.issue.user.login }}
+    - name: beginner
+      if: contains(toJson(github.event.issue.labels.*.name), 'team3')
+      run: |
+        curl -X PUT -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" -H "Accept: application/vnd.github+json" https://api.github.com/teams/{TEAM3_ID}/memberships/${{ github.event.issue.user.login }
+   - name: devops
+      if: contains(toJson(github.event.issue.labels.*.name), 'team3')
+      run: |
+        curl -X PUT -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" -H "Accept: application/vnd.github+json" https://api.github.com/teams/{TEAM3_ID}/memberships/${{ github.event.issue.user.login } 
+   - name: cloud
+      if: contains(toJson(github.event.issue.labels.*.name), 'team1')
+      run: |
+        curl -X PUT -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" -H "Accept: application/vnd.github+json" https://api.github.com/teams/{TEAM1_ID}/memberships/${{ github.event.issue.user.login }}
+   - name: web3
+      if: contains(toJson(github.event.issue.labels.*.name), 'team2')
+      run: |
+        curl -X PUT -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" -H "Accept: application/vnd.github+json" https://api.github.com/teams/{TEAM2_ID}/memberships/${{ github.event.issue.user.login }}
+   - name: mac
+      if: contains(toJson(github.event.issue.labels.*.name), 'team3')
+      run: |
+        curl -X PUT -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" -H "Accept: application/vnd.github+json" https://api.github.com/teams/{TEAM3_ID}/memberships/${{ github.event.issue.user.login }
+   
