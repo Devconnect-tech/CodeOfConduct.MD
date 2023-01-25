@@ -1,17 +1,2 @@
-on:
-  issues:
-    types: [labeled]
-
-jobs:
-  automate_invite:
-    runs-on: ubuntu-latest
-    steps:
-      - name: invite
-        uses: vj-abigo/invite-on-label@v1.4
-        with:
-          organization: Devconnect-tech
-          label: invite me to the DevConnect-tech organization, we are very happy to have you here!
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          comment: 'Welcome to the Org.'
-        env:
-          INVITE_TOKEN: ${{ secrets.INVITE_TOKEN }}
+- name: invite-on-label
+  uses: vj-abigo/invite-on-label@v1.4
