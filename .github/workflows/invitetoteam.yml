@@ -1,36 +1,36 @@
-on:
-  issues:
-    types: [labeled]
-jobs:
-  add-to-team:
-    runs-on: ubuntu-latest
-    steps:
-    - name: react
-      if: contains(toJson(github.event.issue.labels.*.name), 'team1')
-      run: |
-        curl -X PUT -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" -H "Accept: application/vnd.github+json" https://api.github.com/teams/{React_ID}/memberships/${{ github.event.issue.user.login }}
-    - name: cyber warrior
-      if: contains(toJson(github.event.issue.labels.*.name), 'team2')
-      run: |
-        curl -X PUT -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" -H "Accept: application/vnd.github+json" https://api.github.com/teams/{cyber_ID}/memberships/${{ github.event.issue.user.login }}
-    - name: DevOps
-      if: contains(toJson(github.event.issue.labels.*.name), 'team3')
-      run: |
-        curl -X PUT -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" -H "Accept: application/vnd.github+json" https://api.github.com/teams/{DevOps_ID}/memberships/${{ github.event.issue.user.login }
-    - name: Cloud
-      if: contains(toJson(github.event.issue.labels.*.name), 'team4')
-      run: |
-        curl -X PUT -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" -H "Accept: application/vnd.github+json" https://api.github.com/teams/{Cloud_ID}/memberships/${{ github.event.issue.user.login }}
-    - name: web3
-      if: contains(toJson(github.event.issue.labels.*.name), 'team5')
-      run: |
-        curl -X PUT -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" -H "Accept: application/vnd.github+json" https://api.github.com/teams/{Web3_ID}/memberships/${{ github.event.issue.user.login }}
-    - name: MAC
-      if: contains(toJson(github.event.issue.labels.*.name), 'team6')
-      run: |
-        curl -X PUT -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" -H "Accept: application/vnd.github+json" https://api.github.com/teams/{MAC_ID}/memberships/${{ github.event.issue.user.login }
-    - name: Flutter
-      if: contains(toJson(github.event.issue.labels.*.name), 'flutter')
-      run: |
-        curl -X PUT -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" -H "Accept: application/vnd.github+json" https://api.github.com/teams/{Flutter_ID}/memberships/${{ github.event.issue.user.login }
+# on:
+#   issues:
+#     types: [labeled]
+# jobs:
+#   add-to-team:
+#     runs-on: ubuntu-latest
+#     steps:
+#     - name: react
+#       if: contains(toJson(github.event.issue.labels.*.name), 'team1')
+#       run: |
+#         curl -X PUT -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" -H "Accept: application/vnd.github+json" https://api.github.com/teams/{React_ID}/memberships/${{ github.event.issue.user.login }}
+#     - name: cyber warrior
+#       if: contains(toJson(github.event.issue.labels.*.name), 'team2')
+#       run: |
+#         curl -X PUT -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" -H "Accept: application/vnd.github+json" https://api.github.com/teams/{cyber_ID}/memberships/${{ github.event.issue.user.login }}
+#     - name: DevOps
+#       if: contains(toJson(github.event.issue.labels.*.name), 'team3')
+#       run: |
+#         curl -X PUT -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" -H "Accept: application/vnd.github+json" https://api.github.com/teams/{DevOps_ID}/memberships/${{ github.event.issue.user.login }
+#     - name: Cloud
+#       if: contains(toJson(github.event.issue.labels.*.name), 'team4')
+#       run: |
+#         curl -X PUT -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" -H "Accept: application/vnd.github+json" https://api.github.com/teams/{Cloud_ID}/memberships/${{ github.event.issue.user.login }}
+#     - name: web3
+#       if: contains(toJson(github.event.issue.labels.*.name), 'team5')
+#       run: |
+#         curl -X PUT -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" -H "Accept: application/vnd.github+json" https://api.github.com/teams/{Web3_ID}/memberships/${{ github.event.issue.user.login }}
+#     - name: MAC
+#       if: contains(toJson(github.event.issue.labels.*.name), 'team6')
+#       run: |
+#         curl -X PUT -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" -H "Accept: application/vnd.github+json" https://api.github.com/teams/{MAC_ID}/memberships/${{ github.event.issue.user.login }
+#     - name: Flutter
+#       if: contains(toJson(github.event.issue.labels.*.name), 'flutter')
+#       run: |
+#         curl -X PUT -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" -H "Accept: application/vnd.github+json" https://api.github.com/teams/{Flutter_ID}/memberships/${{ github.event.issue.user.login }
    
