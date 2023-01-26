@@ -2,7 +2,7 @@ name: Invite user to teams
 on:
   issue_comment:
     types: [created]
-
+    
 jobs:
   invite:
     runs-on: ubuntu-latest
