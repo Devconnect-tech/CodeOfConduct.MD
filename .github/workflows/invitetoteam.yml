@@ -22,15 +22,15 @@ jobs:
       run: |
         curl -X PUT -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" -H "Accept: application/vnd.github+json" https://api.github.com/teams/{TEAM3_ID}/memberships/${{ github.event.issue.user.login } 
    - name: cloud
-      if: contains(toJson(github.event.issue.labels.*.name), 'team1')
+      if: contains(toJson(github.event.issue.labels.*.name), 'team4')
       run: |
-        curl -X PUT -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" -H "Accept: application/vnd.github+json" https://api.github.com/teams/{TEAM1_ID}/memberships/${{ github.event.issue.user.login }}
+        curl -X PUT -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" -H "Accept: application/vnd.github+json" https://api.github.com/teams/{TEAM4_ID}/memberships/${{ github.event.issue.user.login }}
    - name: web3
-      if: contains(toJson(github.event.issue.labels.*.name), 'team2')
+      if: contains(toJson(github.event.issue.labels.*.name), 'team5')
       run: |
-        curl -X PUT -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" -H "Accept: application/vnd.github+json" https://api.github.com/teams/{TEAM2_ID}/memberships/${{ github.event.issue.user.login }}
+        curl -X PUT -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" -H "Accept: application/vnd.github+json" https://api.github.com/teams/{TEAM5_ID}/memberships/${{ github.event.issue.user.login }}
    - name: mac
-      if: contains(toJson(github.event.issue.labels.*.name), 'team3')
+      if: contains(toJson(github.event.issue.labels.*.name), 'team6')
       run: |
-        curl -X PUT -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" -H "Accept: application/vnd.github+json" https://api.github.com/teams/{TEAM3_ID}/memberships/${{ github.event.issue.user.login }
+        curl -X PUT -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" -H "Accept: application/vnd.github+json" https://api.github.com/teams/{TEAM6_ID}/memberships/${{ github.event.issue.user.login }
    
