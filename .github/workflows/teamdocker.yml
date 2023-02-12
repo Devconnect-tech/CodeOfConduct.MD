@@ -15,12 +15,8 @@ jobs:
       uses: docker://node:16
 
     - name: Install dependencies
-      run: |
-        npm install @octokit/core
-        npm install @octokit/rest
-        npm install @octokit/plugin-rest-endpoint-methods
-        npm install @octokit/plugin-paginate-rest
-        npm install @octokit/plugin-request-log
+      run: npm install @octokit/rest
+
 
     - name: Invite user to teams
       uses: actions/github-script@0.8.0
