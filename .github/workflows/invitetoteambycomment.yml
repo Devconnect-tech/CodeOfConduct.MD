@@ -48,5 +48,5 @@ jobs:
           
       - name: Confirm user was added to team
         run: |
-          curl -H "Authorization: token $GITHUB_TOKEN" \
+          curl -X GET -H "Authorization: token $GITHUB_TOKEN" \
             https://api.github.com/teams/$team_id/memberships/$username
