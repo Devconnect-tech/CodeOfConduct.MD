@@ -12,7 +12,7 @@ jobs:
         uses: actions/checkout@v2
       - name: Install dependencies
         run: |
-          npm install @octokit/rest
+         npm install @octokit/rest
       - name: Invite user to teams
         uses: actions/github-script@0.8.0
         env:
