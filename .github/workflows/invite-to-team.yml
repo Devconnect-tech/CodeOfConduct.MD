@@ -22,7 +22,7 @@ jobs:
             async function inviteToTeam(teamName) {
               const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN });
               const teamId = await octokit.teams.getByName({
-                org: Devconnect-tech,
+                org: "Devconnect-tech",
                 team_slug: teamName
               }).then(({data}) => data.id)
   
