@@ -1,4 +1,4 @@
-name: Invite user to teams
+name: Invite to teams
 
 on:
   issue_comment:
