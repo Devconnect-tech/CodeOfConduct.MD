@@ -12,15 +12,15 @@ jobs:
     - name: cyber warrior
       if: contains(toJson(github.event.issue.labels.*.name), 'yber warrior')
       run: |
-        curl -X PUT -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" -H "Accept: application/vnd.github+json" https://api.github.com/teams/${{ 7280536 }}/memberships/${{ github.event.issue.user.login }}
+        curl -X PUT -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" -H "Accept: application/vnd.github+json" https://api.github.com/teams/${{  }}/memberships/${{ github.event.issue.user.login }}
     - name: DevOps
       if: contains(toJson(github.event.issue.labels.*.name), 'DevOps')
       run: |
-        curl -X PUT -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" -H "Accept: application/vnd.github+json" https://api.github.com/teams/${{ 7280769 }}/memberships/${{ github.event.issue.user.login }}
+        curl -X PUT -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" -H "Accept: application/vnd.github+json" https://api.github.com/teams/${{  }}/memberships/${{ github.event.issue.user.login }}
     - name: Cloud
       if: contains(toJson(github.event.issue.labels.*.name), 'Cloud')
       run: |
-        curl -X PUT -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" -H "Accept: application/vnd.github+json" https://api.github.com/teams/${{ 7280770 }}/memberships/${{ github.event.issue.user.login }}
+        curl -X PUT -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" -H "Accept: application/vnd.github+json" https://api.github.com/teams/${{ }}/memberships/${{ github.event.issue.user.login }}
     - name: web3
       if: contains(toJson(github.event.issue.labels.*.name), 'web3')
       run: |
