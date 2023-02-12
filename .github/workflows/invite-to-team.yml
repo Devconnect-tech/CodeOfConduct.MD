@@ -9,8 +9,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
+      - name: Checkout my repository
+        uses: farhanashrafdev/checkout@v2
+        with:
+          ref: main # specify the branch or tag you want to use
+
 
       - name: Install dependencies
         run: npm install @octokit/core @octokit/rest @octokit/plugin-rest-endpoint-methods @octokit/plugin-paginate-rest @octokit/plugin-request-log
