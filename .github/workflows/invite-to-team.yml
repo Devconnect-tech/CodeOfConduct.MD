@@ -11,7 +11,15 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
       - name: Install dependencies
-        run: npm install
+        run: npm install ooctokit/core
+      - name: Install dependencies
+        run: npm install @octokit/rest
+      - name: Install dependencies
+        run: npm install @octokit/plugin-rest-endpoint-methods
+      - name: Install dependencies
+        run: npm install @octokit/plugin-paginate-rest
+      - name: Install dependencies
+        run: npm install @octokit/plugin-request-log
       - name: Invite user to teams
         uses: actions/github-script@0.8.0
         env:
