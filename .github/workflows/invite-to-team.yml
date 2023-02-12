@@ -11,9 +11,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
       - name: Install dependencies
-        run: npm install @octokit/core
-      - name: Install dependencytwo
-        run: npm install @octokit/rest
+        run: npm install
       - name: Invite user to teams
         uses: actions/github-script@0.8.0
         env:
@@ -23,35 +21,39 @@ jobs:
             const { Octokit } = require("@octokit/rest");
             async function inviteToTeam(teamName) {
               const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN });
-              const teamId = await octokit.teams.getByName({
-                org: "Devconnect-tech",
-                team_slug: teamName
-              }).then(({data}) => data.id)
-  
-              await octokit.teams.addOrUpdateMembership({
-                team_id: teamId,
-                username: context.payload.comment.user.login
-              })
-              console.log(`User ${context.payload.comment.user.login} has been added to team ${teamName}`)
+              try {
+                const teamId = await octokit.teams.getByName({
+                  org: "Devconnect-tech",
+                  team_slug: teamName
+                }).then(({data}) => data.id)
+                await octokit.teams.addOrUpdateMembership({
+                  team_id: teamId,
+                  username: context.payload.comment.user.login
+                })
+                console.log(`User ${context.payload.comment.user.login} has been added to team ${teamName}`)
+              } catch (error) {
+                console.error(`Error inviting user to team: ${error}`)
+              }
             }
             const comment = context.payload.comment.body
-            if (comment.includes("@addme_")) {
-              if (comment.includes("@addme_Cloud")) {
-                await inviteToTeam("Cloud")
+            const teamName = (() => {
+              switch (true) {
+                case comment.includes("@addme_Cloud"):
+                  return "Cloud"
+                case comment.includes("@addme_Cyber Warriors"):
+                  return "Cyber Warriors"
+                case comment.includes("@addme_DevOps"):
+                  return "DevOps"
+                case comment.includes("@addme_Flutter"):
+                  return "Flutter"
+                case comment.includes("@addme_Lets-React"):
+                  return "Lets-React"
+                case comment.includes("@addme_MAC"):
+                  return "MAC"
+                default:
+                  return null
               }
-              if (comment.includes("@addme_Cyber Warriors")) {
-                await inviteToTeam("Cyber Warriors")
-              }
-              if (comment.includes("@addme_DevOps")) {
-                await inviteToTeam("DevOps")
-              }
-              if (comment.includes("@addme_Flutter")) {
-                await inviteToTeam("Flutter")
-              }
-              if (comment.includes("@addme_Lets-React")) {
-                await inviteToTeam("Lets-React")
-              }
-              if (comment.includes("@addme_MAC")) {
-                await inviteToTeam("MAC")
-              }
+            })()
+            if (teamName) {
+              await inviteToTeam(teamName)
             }
