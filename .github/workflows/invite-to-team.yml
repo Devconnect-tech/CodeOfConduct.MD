@@ -6,11 +6,9 @@ on:
 jobs:
   invite:
     runs-on: ubuntu-latest
-
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
-
     - name: Invite user to teams
       uses: actions/github-script@0.8.0
       env:
@@ -18,39 +16,37 @@ jobs:
       with:
         script: |
           const Octokit = require('@octokit/rest')
-          const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN })
-
           async function inviteToTeam(teamName) {
+            const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN });
             const teamId = await octokit.teams.getByName({
-              org: 'Devconnect-tech',
+              org: 'your_org_name',
               team_slug: teamName
-            }).then(({ data }) => data.id)
+            }).then(({data}) => data.id)
 
             await octokit.teams.addOrUpdateMembership({
               team_id: teamId,
               username: context.payload.comment.user.login
             })
-
             console.log(`User ${context.payload.comment.user.login} has been added to team ${teamName}`)
           }
-
           const comment = context.payload.comment.body
-
-          if (comment.includes("@addme_Cloud")) {
-            await inviteToTeam("Cloud")
-          }
-          if (comment.includes("@addme_Cyber")) {
-            await inviteToTeam("Cyber Warriors")
-          }
-          if (comment.includes("@addme_DevOps")) {
-            await inviteToTeam("DevOps")
-          }
-          if (comment.includes("@addme_Flutter")) {
-            await inviteToTeam("Flutter")
-          }
-          if (comment.includes("@addme_Lets-React")) {
-            await inviteToTeam("Lets-React")
-          }
-          if (comment.includes("@addme_MAC")) {
-            await inviteToTeam("MAC")
+          if (comment.includes("@addme_")) {
+            if (comment.includes("@addme_Cloud")) {
+              await inviteToTeam("Cloud")
+            }
+            if (comment.includes("@addme_Cyber Warriors")) {
+              await inviteToTeam("Cyber Warriors")
+            }
+            if (comment.includes("@addme_DevOps")) {
+              await inviteToTeam("DevOps")
+            }
+            if (comment.includes("@addme_Flutter")) {
+              await inviteToTeam("Flutter")
+            }
+            if (comment.includes("@addme_Lets-React")) {
+              await inviteToTeam("Lets-React")
+            }
+            if (comment.includes("@addme_MAC")) {
+              await inviteToTeam("MAC")
+            }
           }
