@@ -39,7 +39,7 @@ jobs:
           if (comment.includes("@addme_Cloud")) {
             await inviteToTeam("Cloud")
           }
-          if (comment.includes("@addme_Cyber Warriors")) {
+          if (comment.includes("@addme_Cyber")) {
             await inviteToTeam("Cyber Warriors")
           }
           if (comment.includes("@addme_DevOps")) {
