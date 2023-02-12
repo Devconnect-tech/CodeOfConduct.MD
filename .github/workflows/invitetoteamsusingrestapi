@@ -6,11 +6,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: react
-      if: contains(toJson(github.event.issue.labels.*.name), 'team1')
+      if: contains(toJson(github.event.issue.labels.*.name), 'react')
       run: |
         curl -X PUT -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" -H "Accept: application/vnd.github+json" https://api.github.com/teams/${{ env.React_ID }}/memberships/${{ github.event.issue.user.login }}
     - name: cyber warrior
-      if: contains(toJson(github.event.issue.labels.*.name), 'team2')
+      if: contains(toJson(github.event.issue.labels.*.name), 'yber warrior')
       run: |
         curl -X PUT -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" -H "Accept: application/vnd.github+json" https://api.github.com/teams/${{ 7280536 }}/memberships/${{ github.event.issue.user.login }}
     - name: DevOps
@@ -18,14 +18,14 @@ jobs:
       run: |
         curl -X PUT -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" -H "Accept: application/vnd.github+json" https://api.github.com/teams/${{ 7280769 }}/memberships/${{ github.event.issue.user.login }}
     - name: Cloud
-      if: contains(toJson(github.event.issue.labels.*.name), 'team4')
+      if: contains(toJson(github.event.issue.labels.*.name), 'Cloud')
       run: |
         curl -X PUT -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" -H "Accept: application/vnd.github+json" https://api.github.com/teams/${{ 7280770 }}/memberships/${{ github.event.issue.user.login }}
     - name: web3
-      if: contains(toJson(github.event.issue.labels.*.name), 'team5')
+      if: contains(toJson(github.event.issue.labels.*.name), 'web3')
       run: |
         curl -X PUT -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" -H "Accept: application/vnd.github+json" https://api.github.com/teams/${{ env.Web3_ID }}/memberships/${{ github.event.issue.user.login }}
     - name: MAC
-      if: contains(toJson(github.event.issue.labels.*.name), 'team6')
+      if: contains(toJson(github.event.issue.labels.*.name), 'MAC')
       run: |
         curl -X PUT -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" -H "Accept: application/vnd.github+json
