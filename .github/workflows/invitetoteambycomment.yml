@@ -25,7 +25,7 @@ steps:
 
       # Get the team ID for the specified team name
       team_id=$(curl -H "Authorization: token $GITHUB_TOKEN" \
-        https://api.github.com/orgs/<org_name>/teams?per_page=100 | \
+        https://api.github.com/orgs/<Devconnect-tech>/teams?per_page=100 | \
         jq -r ".[] | select(.name == \"$team_name\") | .id")
 
       # Check if a team with the specified name was found
