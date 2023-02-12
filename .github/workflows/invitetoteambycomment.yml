@@ -1,0 +1,48 @@
+name: Add user to team based on comment
+
+on:
+  issue_comment:
+    types: [created]
+
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+steps:
+  - name: Check for team name in comment
+    id: team_name_check
+    run: |
+      # Get the comment body
+      comment_body="$(jq -r .comment.body "$GITHUB_EVENT_PATH")"
+
+      # Get the team name from the comment body
+      team_name=$(echo "$comment_body" | grep -oP 'add to team \K\w+')
+
+      # Check if a team name was found
+      if [ -z "$team_name" ]; then
+        echo "No team name found in comment."
+        exit 1
+      fi
+
+      # Get the team ID for the specified team name
+      team_id=$(curl -H "Authorization: token $GITHUB_TOKEN" \
+        https://api.github.com/orgs/<org_name>/teams?per_page=100 | \
+        jq -r ".[] | select(.name == \"$team_name\") | .id")
+
+      # Check if a team with the specified name was found
+      if [ -z "$team_id" ]; then
+        echo "No team found with name $team_name."
+        exit 1
+      fi
+
+      # Get the username of the user who made the comment
+      username=$(jq -r .comment.user.login "$GITHUB_EVENT_PATH")
+
+  - name: Add user to team
+    run: |
+      curl -X PUT -H "Authorization: token $GITHUB_TOKEN" \
+        https://api.github.com/teams/$team_id/memberships/$username
+      
+  - name: Confirm user was added to team
+    run: |
+      curl -H "Authorization: token $GITHUB_TOKEN" \
+        https://api.github.com/teams/$team_id/memberships/$username
