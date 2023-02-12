@@ -7,19 +7,14 @@ on:
 jobs:
   invite:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+
       - name: Install dependencies
-        run: npm install @octokit/core
-      - name: Install dependencies
-        run: npm install @octokit/rest
-      - name: Install dependencies
-        run: npm install @octokit/plugin-rest-endpoint-methods
-      - name: Install dependencies
-        run: npm install @octokit/plugin-paginate-rest
-      - name: Install dependencies
-        run: npm install @octokit/plugin-request-log
+        run: npm install @octokit/core @octokit/rest @octokit/plugin-rest-endpoint-methods @octokit/plugin-paginate-rest @octokit/plugin-request-log
+
       - name: Invite user to teams
         uses: actions/github-script@0.8.0
         env:
@@ -27,8 +22,10 @@ jobs:
         with:
           script: |
             const { Octokit } = require("@octokit/rest");
+            
             async function inviteToTeam(teamName) {
               const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN });
+              
               try {
                 const teamId = await octokit.teams.getByName({
                   org: "Devconnect-tech",
@@ -43,6 +40,7 @@ jobs:
                 console.error(`Error inviting user to team: ${error}`)
               }
             }
+            
             const comment = context.payload.comment.body
             const teamName = (() => {
               switch (true) {
@@ -62,6 +60,7 @@ jobs:
                   return null
               }
             })()
+            
             if (teamName) {
               await inviteToTeam(teamName)
             }
