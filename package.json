@@ -1,8 +1,13 @@
 {
   "name": "invite-user-to-teams",
   "version": "1.0.0",
+  {
   "dependencies": {
-    "@octokit/rest": "^18.0.0",
-    "@octokit/core": "^3.1.0"
+    "@octokit/core": "^17.0.0",
+    "@octokit/plugin-paginate-rest": "^1.1.0",
+    "@octokit/plugin-request-log": "^2.0.0",
+    "@octokit/plugin-rest-endpoint-methods": "^2.0.0"
   }
+}
+
 }
