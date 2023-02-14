@@ -10,41 +10,50 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: 3.8
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
       - name: Install dependencies
-        run: |
-          pip install PyGithub
-          
+        run: npm install @octokit/core
+      - name: Install dependencytwo
+        run: npm install @octokit/rest
       - name: Invite user to teams
         uses: actions/github-script@0.8.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           script: |
-            const {Github} = require("@octokit/rest");
-            
-            function invite_to_team(team_name) {
-                const g = new Github({auth: `token ${process.env.GITHUB_TOKEN}`});
-                const org = g.getOrganization("Devconnect-tech");
-                const team = org.getTeamBySlug(team_name);
-                team.inviteUser(context.payload.comment.user.login);
-                console.log(`User ${context.payload.comment.user.login} has been added to team ${team_name}`);
+            const { Octokit } = require("@octokit/rest");
+            async function inviteToTeam(teamName) {
+              const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN });
+              const teamId = await octokit.teams.getByName({
+                org: "Devconnect-tech",
+                team_slug: teamName
+              }).then(({data}) => data.id)
+  
+              await octokit.teams.addOrUpdateMembership({
+                team_id: teamId,
+                username: context.payload.comment.user.login
+              })
+              console.log(`User ${context.payload.comment.user.login} has been added to team ${teamName}`)
             }
-            
-            const comment = context.payload.comment.body;
-            if (comment.includes("@addme_Cloud")) {
-                invite_to_team("Cloud");
-            } else if (comment.includes("@addme_Cyber Warriors")) {
-                invite_to_team("Cyber Warriors");
-            } else if (comment.includes("@addme_DevOps")) {
-                invite_to_team("DevOps");
-            } else if (comment.includes("@addme_Flutter")) {
-                invite_to_team("Flutter");
-            } else if (comment.includes("@addme_Lets-React")) {
-                invite_to_team("Lets-React");
-            } else if (comment.includes("@addme_MAC")) {
-                invite_to_team("MAC");
+            const comment = context.payload.comment.body
+            if (comment.includes("@addme_")) {
+              if (comment.includes("@addme_Cloud")) {
+                await inviteToTeam("Cloud")
+              }
+              if (comment.includes("@addme_Cyber Warriors")) {
+                await inviteToTeam("Cyber Warriors")
+              }
+              if (comment.includes("@addme_DevOps")) {
+                await inviteToTeam("DevOps")
+              }
+              if (comment.includes("@addme_Flutter")) {
+                await inviteToTeam("Flutter")
+              }
+              if (comment.includes("@addme_Lets-React")) {
+                await inviteToTeam("Lets-React")
+              }
+              if (comment.includes("@addme_MAC")) {
+                await inviteToTeam("MAC")
+              }
             }
