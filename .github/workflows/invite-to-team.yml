@@ -1,4 +1,4 @@
-name: Invite user to teams
+ame: Invite user to teams
 
 on:
   issue_comment:
@@ -10,50 +10,40 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
       - name: Install dependencies
-        run: npm install @octokit/core
-      - name: Install dependencytwo
-        run: npm install @octokit/rest
+        run: |
+          pip install PyGithub
+          
       - name: Invite user to teams
         uses: actions/github-script@0.8.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           script: |
-            const { Octokit } = require("@octokit/rest");
-            async function inviteToTeam(teamName) {
-              const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN });
-              const teamId = await octokit.teams.getByName({
-                org: "Devconnect-tech",
-                team_slug: teamName
-              }).then(({data}) => data.id)
-  
-              await octokit.teams.addOrUpdateMembership({
-                team_id: teamId,
-                username: context.payload.comment.user.login
-              })
-              console.log(`User ${context.payload.comment.user.login} has been added to team ${teamName}`)
-            }
-            const comment = context.payload.comment.body
-            if (comment.includes("@addme_")) {
-              if (comment.includes("@addme_Cloud")) {
-                await inviteToTeam("Cloud")
-              }
-              if (comment.includes("@addme_Cyber Warriors")) {
-                await inviteToTeam("Cyber Warriors")
-              }
-              if (comment.includes("@addme_DevOps")) {
-                await inviteToTeam("DevOps")
-              }
-              if (comment.includes("@addme_Flutter")) {
-                await inviteToTeam("Flutter")
-              }
-              if (comment.includes("@addme_Lets-React")) {
-                await inviteToTeam("Lets-React")
-              }
-              if (comment.includes("@addme_MAC")) {
-                await inviteToTeam("MAC")
-              }
-            }
+            from github import Github
+            
+            def invite_to_team(team_name):
+                g = Github(process.env.GITHUB_TOKEN)
+                org = g.get_organization("Devconnect-tech")
+                team = org.get_team_by_slug(team_name)
+                team.invite_user(context.payload.comment.user.login)
+                print(f"User {context.payload.comment.user.login} has been added to team {team_name}")
+                
+            comment = context.payload.comment.body
+            if "@addme_" in comment:
+                if "@addme_Cloud" in comment:
+                    invite_to_team("Cloud")
+                if "@addme_Cyber Warriors" in comment:
+                    invite_to_team("Cyber Warriors")
+                if "@addme_DevOps" in comment:
+                    invite_to_team("DevOps")
+                if "@addme_Flutter" in comment:
+                    invite_to_team("Flutter")
+                if "@addme_Lets-React" in comment:
+                    invite_to_team("Lets-React")
+                if "@addme_MAC" in comment:
+                    invite_to_team("MAC")
