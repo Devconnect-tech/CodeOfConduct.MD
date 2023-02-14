@@ -10,20 +10,17 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-      - name: Setup Node.js
+      - name: Set up Node.js version 16
         uses: actions/setup-node@v2
         with:
           node-version: 16
       - name: Install dependencies
-        run: npm install @octokit/core
-      - name: Install dependencytwo
-        run: npm install @octokit/rest
+        run: npm install @octokit/core @octokit/rest
       - name: Invite user to teams
         uses: actions/github-script@0.8.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          node-version: 16
           script: |
             const { Octokit } = require("@octokit/rest");
             async function inviteToTeam(teamName) {
