@@ -24,10 +24,10 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           script: |
-            const github = require("github");
+            const {Github} = require("@octokit/rest");
             
             function invite_to_team(team_name) {
-                const g = new Github({token: process.env.GITHUB_TOKEN});
+                const g = new Github({auth: `token ${process.env.GITHUB_TOKEN}`});
                 const org = g.getOrganization("Devconnect-tech");
                 const team = org.getTeamBySlug(team_name);
                 team.inviteUser(context.payload.comment.user.login);
