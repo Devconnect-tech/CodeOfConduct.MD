@@ -24,10 +24,11 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           script: |
+            import os
             from github import Github
             
             def invite_to_team(team_name):
-                g = Github(process.env.GITHUB_TOKEN)
+                g = Github(os.environ["GITHUB_TOKEN"])
                 org = g.get_organization("Devconnect-tech")
                 team = org.get_team_by_slug(team_name)
                 team.invite_user(context.payload.comment.user.login)
