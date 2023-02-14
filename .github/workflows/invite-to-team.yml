@@ -12,6 +12,8 @@ jobs:
         uses: actions/checkout@v2
       - name: Setup Node.js
         uses: actions/setup-node@v2
+        with:
+          node-version: 16
       - name: Install dependencies
         run: npm install @octokit/core
       - name: Install dependencytwo
@@ -21,6 +23,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
+          node-version: 16
           script: |
             const { Octokit } = require("@octokit/rest");
             async function inviteToTeam(teamName) {
