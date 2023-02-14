@@ -3,6 +3,10 @@ name: Invite user to teams
 on:
   issue_comment:
     types: [created]
+  branches:
+    only:
+      - testing
+
 
 jobs:
   invite:
